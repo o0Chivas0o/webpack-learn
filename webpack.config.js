@@ -1,5 +1,7 @@
 module.exports = {
-  // mode: 'development',
+  // 未开启 mode 选项 需使用 npx webpack -mode=development
+  // 开启 mode 选项 则直接使用 npx webpack 即可
+  mode: 'development',
   module: {
     rules: [
       {
