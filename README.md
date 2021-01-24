@@ -58,11 +58,13 @@ const dog = new Animal('dog')
 2. 填入如下配置
    ```
    module.exports = {
-    rules:{
+    rules:[
+        {
         test:/\.jsx$/,
         use:'babel-loader',
         exclude:/node_modules/
-    }
+        }
+    ]
    }
    ```
 
