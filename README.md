@@ -87,3 +87,37 @@ const dog = new Animal('dog')
 2. 语法降级需要使用 babel-loader.
 3. webpack.config.js文件中的use语法,有三种,详细注释在本项目的文件内
 4. mode中还有一个为`node`模式
+
+## 在浏览器中查看打包后的页面
+
+### 下载 html-webpack-plugin
+
+1. 命令行输入 `yarn add html-webpack-plugin -D`
+
+### 修改 webpack.config.js 配置 添加插件
+
+1. 修改如下配置
+    ```js
+    const HtmlWebpackPlugin = require('html-webpack-plugin');
+    module.exports = {
+      // ...
+      plugins: [
+        new HtmlWebpackPlugin({
+          // 入口文件
+          template: './public/index.html',
+          // 打包后的文件名称
+          filename: 'index.html',
+          minify: {
+            // 是否删除属性的双引号
+            removeAttributeQuotes: false,
+            // 是否折叠空白
+            collapseWhitespace: false
+          },
+          // 是否加上hash,默认是false
+          // hash:true
+        })
+      ]
+    }
+    ```
+
+2. 此时执行`npx webpack` 就可以看到 `dist` 目录下的 `index.html` 文件了
