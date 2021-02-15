@@ -121,3 +121,47 @@ const dog = new Animal('dog')
     ```
 
 2. 此时执行`npx webpack` 就可以看到 `dist` 目录下的 `index.html` 文件了
+
+## 添加 `webpack-dev-server` 插件
+
+### 下载 `webpakc-dev-server` 以便在浏览器内浏览
+
+复制如下代码 `yarn add webpack-dev-server -D`
+
+修改 package.json 中的 script
+
+```json
+{
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack serve",
+    "build": "cross-env NODE_ENV=production webpack"
+  }
+}
+```
+
+此时发现通过 `yarn dev` 无法开启预览，会报错，此时需要配置`contentBase` 去解决，而在配置了 `html-webpack-plugin`的情况下，`contentBase`
+不会起作用，但是可以在`webpack.config.js`中进行 `webpack-dev-server` 的其他配置。
+
+```js
+//webpack.config.js
+module.exports = {
+  //...
+  devServer: {
+    port: '3000', //默认是8080
+    quiet: false, //默认不启用
+    inline: true, //默认开启 inline 模式，如果设置为false,开启 iframe 模式
+    stats: "errors-only", //终端仅打印 error
+    overlay: false, //默认不启用
+    clientLogLevel: "silent", //日志等级
+    compress: true //是否启用 gzip 压缩
+  }
+}
+
+```
+此时就能看到浏览器内通过webpack打包的页面了。
+
+总结:
+1. webpack 5 中更改了原有的命令, `cross-env NODE_ENV=development webpack-dev-server`更改为`cross-env NODE_ENV=development webpack serve
+   `
+2. 在配置 devServer 时, 各项配置均能通过 [官网提供的配置](https://webpack.js.org/configuration/dev-server/)
+   查到.

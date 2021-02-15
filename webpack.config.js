@@ -1,6 +1,7 @@
 // 引入 html-webpack-plugin
 // 解决无法自动在浏览器查看页面的问题
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   // 未开启 mode 选项 需使用 npx webpack -mode=development
@@ -48,5 +49,21 @@ module.exports = {
       // 是否加上hash,默认是false
       // hash:true
     })
-  ]
+  ],
+  devServer: {
+    // 端口号
+    port: '3000',
+    // 默认不启用
+    quiet: false,
+    // 默认开启 inline 模式,如果设置为 false,开启iframe模式
+    inline: true,
+    //终端仅打印 error
+    stats: 'errors-only',
+    //默认不启用
+    overlay: false,
+    //日志等级
+    clientLogLevel: 'silent',
+    //是否启用 gzip 压缩
+    compress: true
+  }
 }
